@@ -37,5 +37,13 @@ export async function action({ request }) {
   if (!response.ok) {
     throw json({ message: "사용자 인증 불가" }, { status: 500 });
   }
+
+  //응답에서 토큰 추출하기
+  const resData = await response.json();
+  const token = resData.token;
+
+  //브라우저 API인 localStorage에 토큰 저장하기
+  localStorage.setItem("token", token);
+
   return redirect("/");
 }
