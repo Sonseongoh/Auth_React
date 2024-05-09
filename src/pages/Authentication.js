@@ -44,6 +44,9 @@ export async function action({ request }) {
 
   //브라우저 API인 localStorage에 토큰 저장하기
   localStorage.setItem("token", token);
+  const expiration = new Date();
+  expiration.setHours(expiration.getHours() + 1);
+  localStorage.setItem("expiration", expiration.toISOString());
 
   return redirect("/");
 }
